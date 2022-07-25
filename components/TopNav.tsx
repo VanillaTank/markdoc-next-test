@@ -1,19 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { DocSearch } from '@docsearch/react';
-
-function Search() {
-    return (
-        <div>
-            <DocSearch
-                appId={'0SNY69OLGK'}
-                apiKey={'8d4aec2d9afe6404e555ce51fd7838ee'}
-                indexName="test"
-            />
-        </div>
-
-    );
-}
 
 export function TopNav({ children }) {
     return (
@@ -23,7 +9,6 @@ export function TopNav({ children }) {
             </Link>
             <section className='items-center flex gap-4 p-0'>
                 {children}
-                <Search />
             </section>
         </nav>
     );
