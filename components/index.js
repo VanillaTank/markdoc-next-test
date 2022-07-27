@@ -6,3 +6,4 @@ export * from './TableOfContents';
 export * from './TopNav';
 export * from './Footer'
 export * from './AppLink'
+export * from './Search'
