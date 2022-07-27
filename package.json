@@ -11,6 +11,7 @@
     "@markdoc/markdoc": "latest",
     "@markdoc/next.js": "latest",
     "algoliasearch": "^4.14.1",
+    "dotenv": "^16.0.1",
     "globby": "^13.1.2",
     "gray-matter": "^4.0.3",
     "instantsearch.css": "^7.4.5",

@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import fs from "fs";
 import matter from "gray-matter";
 import algoliasearch from 'algoliasearch';
@@ -13,8 +14,10 @@ async function getData() {
 
     const paths = await globby(['pages/docs']);
     return paths.map((filename) => {
+        const slug = filename
+            .replace('pages/', '')
+            .replace('.md', '')
         const markdownWithMeta = fs.readFileSync(filename, 'utf-8');
-        const slug = filename.replace('.md', '')
         const {data: frontmatter, content} = matter(markdownWithMeta);
         md.render(content.replace(/{%\s.+\s%}/g, ''))
 
@@ -24,18 +27,15 @@ async function getData() {
             content: md.plainText
         }
     })
-
 }
+const client = algoliasearch(
+    process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+    process.env.NEXT_PUBLIC_SEARCH_ADMIN_API_KEY
+);
+const index = client.initIndex(process.env.NEXT_PUBLIC_SEARCH_INDEX_NAME);
+const data = await getData();
+index.saveObjects(data, {
+    autoGenerateObjectIDIfNotExist: true
+});
 
-console.log(await getData())
-
-// const client = algoliasearch(
-//     '',
-//     ''
-// );
-// const index = client.initIndex("test")
-// index.saveObjects(getData(), {
-//     autoGenerateObjectIDIfNotExist: true
-// });
-//
-// console.log('Done')
+console.log('Done')

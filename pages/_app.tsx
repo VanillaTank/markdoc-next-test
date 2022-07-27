@@ -6,10 +6,8 @@ import 'prismjs';
 import 'prismjs/components/prism-bash.min';
 import 'prismjs/themes/prism.css';
 import '@docsearch/css';
-import '../public/globals.css'
-
 import 'instantsearch.css/themes/reset.css';
-
+import '../public/globals.css'
 
 import type { AppProps } from 'next/app'
 
@@ -65,24 +63,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="referrer" content="strict-origin" />
 				<meta name="title" content={title} />
 				<meta name="description" content={description} />
-				<link rel="shortcut icon" href="/favicon.ico" />
-				<link rel="icon" href="/favicon.ico" />
+				{/*<link rel="shortcut icon" href="/favicon.ico" />*/}
+				{/*<link rel="icon" href="/favicon.ico" />*/}
 			</Head>
 			<TopNav>
-				<Link href="/flora-and-fauna">
+				<Link href="docs/flora-and-fauna">
 					<a >Flora and fauna</a>
 				</Link>
-				<Link href="/religions">
+				<Link href="docs/religions">
 					<a >Religions</a>
 				</Link>
-				<Link href="/countries">
+				<Link href="docs/countries">
 					<a >Countries</a>
-				</Link>
-				<Link href="/history">
-					<a >History</a>
-				</Link>
-				<Link href="/persons">
-					<a >Persons</a>
 				</Link>
 			</TopNav>
 			<div className="page flex grow pt-[var(--top-nav-height)] min-h-screen">

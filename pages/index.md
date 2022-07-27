@@ -10,11 +10,9 @@ description: general information about my book
 Буквально только что у моего мира появилось имя: **Фрарк**. Cпасибо [генератору случайных названий](https://randomall.ru)
 
 {% callout title="Итак, нам важны такие аспекты как:  " %}
-[религия](/religions 'Религия')   
-[цветочки юга](/flora-and-fauna/south-flowers)  
-[страны]()  
-[история мира и государств]()  
-[истории и мотивации персонажей]()  
+[религия](docs/religions 'Религия')   
+[цветочки юга](docs/flora-and-fauna/south-flowers)  
+[страны](docs/countries)
 {% /callout %}
 
 ## Что тут происходит2?

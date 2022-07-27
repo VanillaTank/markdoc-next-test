@@ -3,7 +3,11 @@ import { connectStateResults, Hits, InstantSearch, SearchBox } from 'react-insta
 import React from "react";
 import Link from "next/link";
 
-const searchClient = algoliasearch('', '');
+const SEARCH_INDEX_NAME = process.env.NEXT_PUBLIC_SEARCH_INDEX_NAME;
+
+const searchClient = algoliasearch(
+    process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+    process.env.NEXT_PUBLIC_SEARCH_SEARCH_API_KEY);
 
 const Results = connectStateResults(({searchState, searchResults, searching}) => {
         const hasQuery = searchState && searchState.query;
@@ -20,6 +24,9 @@ const Results = connectStateResults(({searchState, searchResults, searching}) =>
 );
 
 function getMatchPosition(rawText: string): number {
+    if(!rawText || typeof rawText !== 'string') {
+        return -1
+    }
     return rawText.indexOf('<ais-highlight-0000000000>');
 }
 
@@ -59,7 +66,7 @@ function Hit(props: any) {
 
 export default function Search() {
     return (
-        <InstantSearch indexName="test" searchClient={searchClient}>
+        <InstantSearch indexName={SEARCH_INDEX_NAME} searchClient={searchClient}>
             <SearchBox/>
             <Results/>
         </InstantSearch>
