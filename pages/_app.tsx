@@ -67,13 +67,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				{/*<link rel="icon" href="/favicon.ico" />*/}
 			</Head>
 			<TopNav>
-				<Link href="docs/flora-and-fauna">
+				<Link href="/docs/flora-and-fauna">
 					<a >Flora and fauna</a>
 				</Link>
-				<Link href="docs/religions">
+				<Link href="/docs/religions">
 					<a >Religions</a>
 				</Link>
-				<Link href="docs/countries">
+				<Link href="/docs/countries">
 					<a >Countries</a>
 				</Link>
 			</TopNav>

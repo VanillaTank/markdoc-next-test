@@ -17,14 +17,16 @@ const Results = connectStateResults(({searchState, searchResults, searching}) =>
             return <Hits hitComponent={Hit}/>;
         }
         if (hasQuery && !hasResults && !isSearching) {
-            return <h4 className="text-[18px] m-0 mt-[15px]">No results</h4>
+            return <h4
+                onClick={(e) => {e.stopPropagation()}}
+                className="text-[18px] m-0 mt-[15px]">No results</h4>
         }
         return null;
     }
 );
 
 function getMatchPosition(rawText: string): number {
-    if(!rawText || typeof rawText !== 'string') {
+    if (!rawText || typeof rawText !== 'string') {
         return -1
     }
     return rawText.indexOf('<ais-highlight-0000000000>');
@@ -48,13 +50,13 @@ function Hit(props: any) {
 
     if (contentMatchPosition !== -1) {
         content = rawContent
-            .slice(contentMatchPosition, (contentMatchPosition+150))
+            .slice(contentMatchPosition, (contentMatchPosition + 150))
             .replace(/<ais-highlight-0000000000>/g, '<mark>')
             .replace(/<\/ais-highlight-0000000000>/g, '</mark>') ?? "";
     }
 
     return (
-        <Link href={props.hit.slug || ''}>
+        <Link href={"/"+props.hit.slug || ''}>
             <a>
                 <h4 className="text-[18px] m-0" dangerouslySetInnerHTML={{__html: title}}/>
                 <div dangerouslySetInnerHTML={{__html: content}}/>
@@ -64,12 +66,26 @@ function Hit(props: any) {
 }
 
 
-export default function Search() {
+export default function Search({isAllowShowSearch, setIsAllowShowSearch}) {
     return (
-        <InstantSearch indexName={SEARCH_INDEX_NAME} searchClient={searchClient}>
-            <SearchBox/>
-            <Results/>
-        </InstantSearch>
+        <div className="relative">
+            <div
+                onClick={() => setIsAllowShowSearch(false)}
+                className="fixed top-0 bottom-0 left-0 right-0 bg-slate-500/[.6] z-[110]"
+            >
+            </div>
+
+            <div
+                className="w-[500px] absolute top-0 right-[calc(50vw-250px)] z-[120] border bg-white p-8 rounded border-[color:var(--border-color)] max-h-[500px] min-h-[102px]"
+            >
+                <InstantSearch indexName={SEARCH_INDEX_NAME} searchClient={searchClient}>
+                    <SearchBox/>
+                    <div onClick={() => setIsAllowShowSearch(false)}>
+                        <Results/>
+                    </div>
+                </InstantSearch>
+            </div>
+        </div>
     )
 }
 

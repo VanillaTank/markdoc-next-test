@@ -16,19 +16,8 @@ export function TopNav({children}) {
                 {children}
                 <button type="button" onClick={() => setIsAllowShowSearch(true)}>Search</button>
                 {
-                    isAllowShowSearch &&
-                    <div
-                        onClick={() => setIsAllowShowSearch(false)}
-                        className="fixed top-0 bottom-0 left-0 right-0 bg-slate-500/[.6] flex justify-center z-[110] pt-[30px]">
+                    isAllowShowSearch && <Search  isAllowShowSearch={isAllowShowSearch} setIsAllowShowSearch={setIsAllowShowSearch}/>
 
-                        <div className="max-w-[500px] w-full">
-                            <div
-                                className="border bg-white p-8 w-full rounded border-[color:var(--border-color)] max-h-[500px] min-h-[102px]"
-                                onClick={(e) => e.stopPropagation()}>
-                                <Search/>
-                            </div>
-                        </div>
-                    </div>
                 }
             </section>
         </nav>

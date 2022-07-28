@@ -7,7 +7,7 @@ import { pathesToFiles } from '../pathes'
 export function SideNav() {
 
     let items = pathesToFiles;
-    const reg = /^\/[-\a-zA-Z]+/;
+    const reg = /^\/docs\/[-\a-zA-Z]+/;
     const router = useRouter();
 
     const pathName = router.pathname.match(reg) ? `${router.pathname.match(reg)[0]}` : undefined;
