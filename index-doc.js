@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import algoliasearch from 'algoliasearch';
 import MarkdownIt from 'markdown-it';
 import plainText from 'markdown-it-plain-text';
-import {globby} from 'globby';
+import { globby } from 'globby';
 
 
 const md = new MarkdownIt();
@@ -13,20 +13,21 @@ md.use(plainText);
 async function getData() {
 
     const paths = await globby(['pages/docs']);
-    return paths.map((filename) => {
-        const slug = filename
-            .replace('pages/', '')
-            .replace('.md', '')
-        const markdownWithMeta = fs.readFileSync(filename, 'utf-8');
-        const {data: frontmatter, content} = matter(markdownWithMeta);
-        md.render(content.replace(/{%\s.+\s%}/g, ''))
-
-        return {
-            frontmatter,
-            slug,
-            content: md.plainText
-        }
-    })
+    return paths
+        .filter(filename => filename.search(/\.md$/) !== -1)
+        .map((filename) => {
+            const slug = filename
+                .replace('pages/', '')
+                .replace('.md', '')
+            const markdownWithMeta = fs.readFileSync(filename, 'utf-8');
+            const {data: frontmatter, content} = matter(markdownWithMeta);
+            md.render(content.replace(/{%\s.+\s%}/g, ''))
+            return {
+                frontmatter,
+                slug,
+                content: md.plainText
+            }
+        })
 }
 const client = algoliasearch(
     process.env.NEXT_PUBLIC_SEARCH_APP_ID,
